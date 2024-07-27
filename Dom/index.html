@@ -1,0 +1,54 @@
+<html>
+<script>
+    //debouncing
+    //Like when we change something in the input box the the request goes to the backend but if we want to reduce 
+    //load on backend then we use debouncing like it waits for some miliseconds if the user doen't type then the request is made
+    let timeout;
+    function debouncPopulatediv() {
+        //how cancle a clock
+        clearTimeout(timeout)
+        timeout=setTimeout(() => {
+            PopulateDiv()
+        }, 100);
+    }
+
+    function PopulateDiv() {
+        const a = document.getElementById("firstnum").value
+        const b = document.getElementById("secondnum").value
+        // const element=document.getElementById("finalsum")
+        // fetch(`https://sum-server.100xdevs.com/sum?a=${a}&b=${b}`)
+        fetch(`http://localhost:3000/sum?a=${a}&b=${b}`)
+            .then(function (response) {
+                // console.log(response)//return a promise
+                //axios
+                response.text()
+                    .then(function (ans) {
+                        // console.log(ans)//returns a+b
+                        document.getElementById("finalsum").innerHTML = `Sum is: ${ans}`
+                    })
+            })
+        // console.log(element)
+        // const sum=parseInt(a)+parseInt(b)
+        // element.innerHTML=`Sum is ${sum}`
+    }
+
+    //another way os same thing using async await syntax
+    async function PopulateDiv2() {
+        const a = document.getElementById("firstnum").value
+        const b = document.getElementById("secondnum").value
+        const response = await fetch(`https://sum-server.100xdevs.com/sum?a=${a}&b=${b}`)
+        const ans = await response.text()
+        document.getElementById("finalsum").innerHTML = `Sum is: ${ans}`
+    }
+</script>
+
+<body>
+    <input oninput="debouncPopulatediv()" id="firstnum" type="text" placeholder="First Num"><br></br>
+    <input oninput="debouncPopulatediv()" id="secondnum" type="text" placeholder="Last Num"><br></br>
+    <!-- <button onclick="PopulateDiv2()">Calculate Sum</button><br></br> -->
+    <div id="finalsum"></div><br>
+</body>
+<!-- DOM -->
+
+
+</html>

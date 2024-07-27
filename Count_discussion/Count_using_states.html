@@ -1,0 +1,35 @@
+<!-- 3 things to keep in mind when using REACT
+i) State
+ii) Components
+iii) Rerendering of application -->
+<html>
+
+<body>
+    <div id="buttonCount"></div>
+    <script>
+        let state = {
+            count: 0
+        }
+        function onButtonPress() {
+            state.count++;
+            buttonComponentRerender()
+        }
+
+        //A coponent takes props or state and gives the output here, count is a state
+        function buttonComponent(count) {
+            const button = document.createElement("button");
+            button.innerHTML = `Count ${state.count}`;
+            button.setAttribute("onclick", "onButtonPress()");
+            return button;
+        }
+
+        function buttonComponentRerender() {
+            const parent = document.getElementById("buttonCount").innerHTML = "";
+            const component = buttonComponent(state.count);
+            document.getElementById("buttonCount").appendChild(component);
+        }
+        buttonComponentRerender();
+    </script>
+</body>
+
+</html>
