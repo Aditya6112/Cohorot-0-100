@@ -1,5 +1,5 @@
-export function Landing(){
-    return(
+export function Landing() {
+    return (
         <>
             Landing Page
         </>

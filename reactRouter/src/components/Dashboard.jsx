@@ -1,5 +1,5 @@
-export function Dashboard(){
-    return(
+export function Dashboard() {
+    return (
         <>
             Dashboard Page
         </>
