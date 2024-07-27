@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
-import { lazy, Suspense, useState } from 'react'
+import { lazy, Suspense, useContext, useState } from 'react'
+import { CountContext } from './components/Context';
 
 //1st code starts here
 // const Dashboard = lazy(() => import('./components/Dashboard'))
@@ -42,27 +43,32 @@ import { lazy, Suspense, useState } from 'react'
 function App() {
   const [count, setCount] = useState(0);
 
+  //wrap everyone who wants to teleported from one component to another component here count is that.
   return (
     <div>
-      <Count count={count} setCount={setCount} />
+      <CountContext.Provider value={count}>
+        <Count count={count} setCount={setCount} />
+      </CountContext.Provider>
     </div>
   )
 }
 
 function Count({ count, setCount }) {
   return <div>
-    <CountRenderer count={count} />
-    <Buttons count={count} setCount={setCount} />
+    <CountRenderer />
+    <Buttons setCount={setCount} />
   </div>
 }
 
-function CountRenderer({ count }) {
+function CountRenderer() {
+  const count = useContext(CountContext);
   return <div>
     Counter: {count}
   </div>
 }
 
-function Buttons({ count, setCount }) {
+function Buttons({ setCount }) {
+  const count = useContext(CountContext);
   return <div>
     <button onClick={() => {
       setCount(count + 1)
