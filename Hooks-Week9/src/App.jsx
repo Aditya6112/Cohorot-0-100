@@ -1,28 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
-const useMousePointer = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e) => {
-    setPosition({ x: e.clientX, y: e.clientY });
-  };
-
-  useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
-  return position;
-};
+function useInterval(fn,timeout){
+  useEffect(()=>{
+    const value=setInterval(()=>{
+      fn()
+    },timeout)
+    return() => clearInterval(value);
+  },[fn,timeout])
+}
 
 function App() {
-  const mousePointer = useMousePointer();
+  const [count, setCount] = useState(0);
+
+  useInterval(() => {
+    setCount(c => c + 1);
+  }, 1000)
 
   return (
     <>
-      Your mouse position is {mousePointer.x} {mousePointer.y}
+      Timer is at {count}
     </>
   )
 }
