@@ -1,32 +1,32 @@
-import { useState } from 'react'
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import './App.css'
-
 function App() {
+  const [render, setRender] = useState(true);
+
+  useEffect(() => {
+    setInterval(() => {
+      setRender(r => !r);
+    }, 5000)
+  }, []);
+
   return (
     <>
-      <MyComponent/>
+      {render ? <MyComponent /> : <div></div>}
     </>
   )
 }
-class MyComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 };
-  }
+function MyComponent() {
+  useEffect(() => {
+    console.error("component mounted")
+    //lifecycle event after 10 sec component unmounted get logged
+    return () => {
+      console.log("component unmounted")
+    };
+  }, []);
 
-  incrementCount = () => {
-    this.setState({ count: this.state.count + 1 });
-  }
-
-  render() {
-    return (
-      <div>
-        <p>{this.state.count}</p>
-        <button onClick={this.incrementCount}>Increment</button>
-      </div>
-    );
-  }
+  return <>
+    From inside my component
+  </>
 }
 
 export default App
