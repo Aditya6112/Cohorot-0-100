@@ -81,9 +81,26 @@
 //     greet(phrase: string): void;
 // }
 
-type Greettype = number | string
-function greet(id: Greettype){
-    console.log(id)
+// type Greettype = number | string
+// function greet(id: Greettype){
+//     console.log(id)
+// }
+// greet(1)
+// greet("aditya")
+
+enum Directions {
+    Up, //0
+    //also we can give a value like UP="up"
+    Down, //1
+    Left, //2
+    Right //3
 }
-greet(1)
-greet("aditya")
+function doSomething(keyPressed: Directions) {
+    if (keyPressed == Directions.Up) {
+
+    }
+}
+doSomething(Directions.Up);
+doSomething(Directions.Down);
+console.log(Directions.Up);
+console.log(Directions.Down);
