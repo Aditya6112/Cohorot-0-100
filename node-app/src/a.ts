@@ -3,6 +3,8 @@
 // }
 // greet("aditya")
 
+import { get } from "mongoose";
+
 // function sum(a: number, b: number): number {
 //     return a + b;
 // }
@@ -88,19 +90,28 @@
 // greet(1)
 // greet("aditya")
 
-enum Directions {
-    Up, //0
-    //also we can give a value like UP="up"
-    Down, //1
-    Left, //2
-    Right //3
-}
-function doSomething(keyPressed: Directions) {
-    if (keyPressed == Directions.Up) {
+// enum Directions {
+//     Up, //0
+//     //also we can give a value like UP="up"
+//     Down, //1
+//     Left, //2
+//     Right //3
+// }
+// function doSomething(keyPressed: Directions) {
+//     if (keyPressed == Directions.Up) {
 
-    }
+//     }
+// }
+// doSomething(Directions.Up);
+// doSomething(Directions.Down);
+// console.log(Directions.Up);
+// console.log(Directions.Down);
+
+//generics
+function getFirstElement<T>(arr: T[]): T {
+    return arr[0];
 }
-doSomething(Directions.Up);
-doSomething(Directions.Down);
-console.log(Directions.Up);
-console.log(Directions.Down);
+const el = getFirstElement<string>(["aditya", "rajSingh"]);
+const el2 = getFirstElement([1, 2]);
+const el3 = getFirstElement([true, false]);
+console.log(el.toLowerCase());
