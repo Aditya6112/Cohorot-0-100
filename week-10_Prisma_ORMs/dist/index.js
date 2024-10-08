@@ -1,4 +1,6 @@
 "use strict";
+// import { PrismaClient } from '@prisma/client';
+// const prisma = new PrismaClient();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9,14 +11,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// async function insertUser(username: string, password: string, firstName: string, lastName: string) {
+//     const res = await prisma.user.create({
+//         data: {
+//             email: username,
+//             password,
+//             firstName,
+//             lastName
+//         }
+//     })
+//     console.log(res);
+// }
+// // insertUser("raj8017933@gmail.com","AdityaRaj","Aditya","Raj");
+// insertUser("amansingh@gmail.com","okjiRaj","Aman","Singh");
+//Update
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-function insertUser(username, password, firstName, lastName) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const res = yield prisma.user.create({
+function updateUser(username_1, _a) {
+    return __awaiter(this, arguments, void 0, function* (username, { firstName, lastName }) {
+        const res = yield prisma.user.update({
+            where: { email: username },
             data: {
-                email: username,
-                password,
                 firstName,
                 lastName
             }
@@ -24,5 +39,7 @@ function insertUser(username, password, firstName, lastName) {
         console.log(res);
     });
 }
-// insertUser("raj8017933@gmail.com","AdityaRaj","Aditya","Raj");
-insertUser("amansingh@gmail.com", "okjiRaj", "Aman", "Singh");
+updateUser('raj8017933@gmail.com', {
+    firstName: "Aditya",
+    lastName: "Singh"
+});
